@@ -1,0 +1,14 @@
+{
+	"name": "SplitWise History",
+	"version": "0.0.0",
+	"authors": [
+		"Aniket Lawande <anlawande@gmail.com>"
+	],
+	"license": "MIT",
+	"private": true,
+	"dependencies": {
+		"highcharts-release": "~4.1.8",
+		"jquery": "~2.1.4",
+		"jslinq": "*"
+	}
+}
