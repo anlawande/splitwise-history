@@ -1,19 +1,45 @@
 <html>
-<head>
-	<title>SplitWise History</title>
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!--	<script src="chart.js"></script>-->
-	<script src="bower_components/highcharts-release/highcharts.js"></script>
-	<script src="bower_components/jslinq/dist/linq.min.js"></script>
-	<!--<script src="http://code.highcharts.com/modules/exporting.js"></script>-->
-	<script src="main.js"></script>
-</head>
-<body>
-	<!--<canvas id="myChart" width="600" height="400"></canvas>-->
-	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-	<div id="options">
-		<input type="checkbox" id="total" />Total<br/>
-		<input type="checkbox" id="perUser" />Show per user<br/>
-	</div>
-</body>
+	<head>
+		<title>SplitWise History</title>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<!--	<script src="chart.js"></script>-->
+		<script src="bower_components/highcharts-release/highcharts.js"></script>
+		<script src="bower_components/jslinq/dist/linq.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<!--<script src="http://code.highcharts.com/modules/exporting.js"></script>-->
+		<script src="main.js"></script>
+		<link type="text/css" rel="stylesheet" href="main.css" />
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Splitwise History</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/oauth" class="loginBtn">Login to SplitWise</a></li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+		<!--<canvas id="myChart" width="600" height="400"></canvas>-->
+		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		<div id="options">
+			<input type="checkbox" id="total" />Total<br/>
+			<input type="checkbox" id="perUser" />Show per user<br/>
+		</div>
+	</body>
 </html>

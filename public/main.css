@@ -1,0 +1,10 @@
+.navbar-default .navbar-nav>li>a.loginBtn {
+	background: #5bc5a7;
+    color: #fff;
+    text-shadow: 0 -1px 0 #318970;
+}
+
+.navbar-default .navbar-nav>li>a.loginBtn:hover {
+	color: #000;
+	text-shadow: 0;
+}
