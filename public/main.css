@@ -8,3 +8,9 @@
 	color: #000;
 	text-shadow: 0;
 }
+
+.navbar-default .navbar-nav>li>.nameTxt {
+	padding: 15px 10px;
+	display: block;
+	font-size: 20px;
+}
