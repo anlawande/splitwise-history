@@ -62,16 +62,7 @@ app.get("/oauth/callback", function(req, res) {
 		res.send("You're not supposed to be here.")
 });
 
-/*var tmpAccs = { 
-	token: 'gqm6OCZe2sDUMWZATsntrKZ0Dxv8Wts6Sn7VYzHU',
-	token_secret: '2FUjB3Zt45VPl6acqHCKLRD2IwgwmsJ0L7z4gxjM',
-	verifier: 'uGCVQunm9sGktAXpASGs',
-  	access_token: 'QsDQjpaHdOZSigfCeAvHJNCeOpKAeRjWKMhNEufL',
-  	access_token_secret: 'UWkS0BXEc2nKc6b9shXUNDh3SSh5EUiUsLbiO3SE' 
-}*/
-
 app.get("/whoami", function(req, res) {
-	//req.session.oauth = tmpAccs;
 	if (req.session.oauth) {
 		oa.get('https://secure.splitwise.com/api/v3.0/get_current_user',
 			req.session.oauth.access_token,
