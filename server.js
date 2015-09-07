@@ -77,7 +77,10 @@ app.get("/whoami", function(req, res) {
 			req.session.oauth.access_token,
 			req.session.oauth.access_token_secret,
 			function(err, data, response) {
-				if(err) console.log("Error: " + err);
+				if(err) {
+					res.status(401).send();
+					return;
+				}
 				//console.log(data);
 				data = JSON.parse(data);
 				res.send(stringifySafe(data));
