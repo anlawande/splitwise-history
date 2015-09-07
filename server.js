@@ -154,12 +154,13 @@ app.listen(8000, function() {
 	console.log("Server running...");
 });
 
+var config = JSON.parse(fs.readFileSync("./config.json", {encoding: "utf8"}));
 var oa = new OAuth(
-	"https://secure.splitwise.com/api/v3.0/get_request_token",
-	"https://secure.splitwise.com/api/v3.0/get_access_token",
-	"QHa61E3CfH45safhFAA8IPd0ltWJYJPPS81Qwiha",
-	"xVfdBqy8GVNtBKE1nBUjd5q5YTNBDvIGUqqoghNz",
+	config.request_token_url,
+	config.access_token_url,
+	config.consumer_key,
+	config.consumer_secret,
 	"1.0",
-	"http://localhost:8000/oauth/callback",
+	config.callback_url,
 	"HMAC-SHA1"
 );
