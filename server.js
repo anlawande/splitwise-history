@@ -35,7 +35,6 @@ app.get("/oauth", function(req, res) {
 
 app.get("/dummydata", function(req, res) {
 	var dataObj = {};
-	dataObj.user = JSON.parse(fs.readFileSync("./data/user.json"), {encoding: 'utf8'})["user"];
 	dataObj.friends = JSON.parse(fs.readFileSync("./data/friends.json"), {encoding: 'utf8'})["friends"];
 	dataObj.groups = JSON.parse(fs.readFileSync("./data/groups.json"), {encoding: 'utf8'})["groups"];
 	dataObj.expenses = JSON.parse(fs.readFileSync("./data/expenses.json"), {encoding: 'utf8'})["expenses"];
@@ -43,6 +42,11 @@ app.get("/dummydata", function(req, res) {
 	dataObj = JSON.parse(fs.readFileSync("./data/dummydata.json", {enccoding: "utf8"}));
 	
 	res.send(dataObj);
+});
+
+app.get("/dummyuser", function(req, res) {
+	
+	res.send(fs.readFileSync("./data/dummyuser.json", {encoding: "utf8"}));
 });
 
 app.use("/", function(req,res,next) {
