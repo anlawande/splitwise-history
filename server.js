@@ -33,6 +33,18 @@ app.get("/oauth", function(req, res) {
 	});
 });
 
+app.get("/dummydata", function(req, res) {
+	var dataObj = {};
+	dataObj.user = JSON.parse(fs.readFileSync("./data/user.json"), {encoding: 'utf8'})["user"];
+	dataObj.friends = JSON.parse(fs.readFileSync("./data/friends.json"), {encoding: 'utf8'})["friends"];
+	dataObj.groups = JSON.parse(fs.readFileSync("./data/groups.json"), {encoding: 'utf8'})["groups"];
+	dataObj.expenses = JSON.parse(fs.readFileSync("./data/expenses.json"), {encoding: 'utf8'})["expenses"];
+	
+	dataObj = JSON.parse(fs.readFileSync("./data/dummydata.json", {enccoding: "utf8"}));
+	
+	res.send(dataObj);
+});
+
 app.use("/", function(req,res,next) {
 	if(!req.session.oauth) {
 		res.status(401).send();
@@ -136,7 +148,6 @@ app.get("/myfriends", function(req, res) {
 app.get("/api/mydata", function(req, res) {
 	
 	var dataObj = {};
-	dataObj.user = JSON.parse(fs.readFileSync("./data/user.json"), {encoding: 'utf8'})["user"];
 	dataObj.friends = JSON.parse(fs.readFileSync("./data/friends.json"), {encoding: 'utf8'})["friends"];
 	dataObj.groups = JSON.parse(fs.readFileSync("./data/groups.json"), {encoding: 'utf8'})["groups"];
 	dataObj.expenses = JSON.parse(fs.readFileSync("./data/expenses.json"), {encoding: 'utf8'})["expenses"];

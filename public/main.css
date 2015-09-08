@@ -14,3 +14,7 @@
 	display: block;
 	font-size: 20px;
 }
+
+.jumbotron {
+	padding: 20px 20px;
+}

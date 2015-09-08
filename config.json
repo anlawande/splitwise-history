@@ -1,7 +1,7 @@
 {
 	"request_token_url": "https://secure.splitwise.com/api/v3.0/get_request_token",
 	"access_token_url": "https://secure.splitwise.com/api/v3.0/get_access_token",
-	"callback_url": "[HOSTNAME]/oauth/callback",
-	"consumer_key": "[CONSUMER KEY]",
-	"consumer_secret": "[CONSUMER SECRET]"
+	"callback_url": "http://localhost:8000/oauth/callback",
+	"consumer_key": "O8wZRhozWaQG9GUMgwbL3qjUWZh7xou0Fnc3OayB",
+	"consumer_secret": "aG0yA5iFJtwD3YTwvKaIlfDsqJhmlE01BJu92lNQ"
 }
