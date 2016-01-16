@@ -4,6 +4,7 @@ var fs = require("fs");
 var stringifySafe = require("json-stringify-safe");
 var cookieParser = require("cookie-parser");
 var OAuth= require('oauth').OAuth;
+var async = require("async");
 
 var app = express();
 app.use(cookieParser());
@@ -98,8 +99,8 @@ app.get("/whoami", function(req, res) {
 		res.redirect('/oauth');
 });
 
-app.get("/mygroups", function(req, res) {
-	if (req.session.oauth) {
+function getGroups(req) {
+	return function(callback) {
 		oa.get('https://secure.splitwise.com/api/v3.0/get_groups',
 			req.session.oauth.access_token,
 			req.session.oauth.access_token_secret,
@@ -107,16 +108,14 @@ app.get("/mygroups", function(req, res) {
 				if(err) console.log("Error: " + err);
 				//console.log(data);
 				data = JSON.parse(data);
-				res.send(stringifySafe(data));
+				callback(null, data);
 			}
 		);
 	}
-	else
-		res.redirect('/oauth');
-});
+}
 
-app.get("/myexpenses", function(req, res) {
-	if (req.session.oauth) {
+function getExpenses(req) {
+	return function(callback) {
 		oa.get('https://secure.splitwise.com/api/v3.0/get_expenses?limit=0',
 			req.session.oauth.access_token,
 			req.session.oauth.access_token_secret,
@@ -124,16 +123,14 @@ app.get("/myexpenses", function(req, res) {
 				if(err) console.log("Error: " + err);
 				//console.log(data);
 				data = JSON.parse(data);
-				res.send(stringifySafe(data));
+				callback(null, data);
 			}
 		);
 	}
-	else
-		res.redirect('/oauth');
-});
+}
 
-app.get("/myfriends", function(req, res) {
-	if (req.session.oauth) {
+function getFriends(req) {
+	return function(callback) {
 		oa.get('https://secure.splitwise.com/api/v3.0/get_friends',
 			req.session.oauth.access_token,
 			req.session.oauth.access_token_secret,
@@ -141,22 +138,24 @@ app.get("/myfriends", function(req, res) {
 				if(err) console.log("Error: " + err);
 				//console.log(data);
 				data = JSON.parse(data);
-				res.send(stringifySafe(data));
+				callback(null, data);
 			}
 		);
 	}
-	else
-		res.redirect('/oauth');
-});
+}
 
 app.get("/api/mydata", function(req, res) {
-	
-	var dataObj = {};
-	dataObj.friends = JSON.parse(fs.readFileSync("./data/friends.json"), {encoding: 'utf8'})["friends"];
-	dataObj.groups = JSON.parse(fs.readFileSync("./data/groups.json"), {encoding: 'utf8'})["groups"];
-	dataObj.expenses = JSON.parse(fs.readFileSync("./data/expenses.json"), {encoding: 'utf8'})["expenses"];
-	
-	res.send(dataObj);
+	if (req.session.oauth) {
+		async.parallel([getFriends(req), getGroups(req), getExpenses(req)],
+			function(err, results){
+				var dataObj = {};
+				dataObj.friends = results[0]["friends"];
+				dataObj.groups = results[1]["groups"];
+				dataObj.expenses = results[2]["expenses"];
+
+				res.send(dataObj);
+			});
+	}
 });
 
 app.listen(8000, function() {
