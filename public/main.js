@@ -1,6 +1,8 @@
 $(function () {
 	window.swHistory = {};
 	window.swHistory.options = {};
+	$(".container").hide();
+	$(".options").hide();
 	
 	$.ajax({
 		url: "/whoami",
@@ -20,7 +22,7 @@ $(function () {
 		var respObj = JSON.parse(body);
 		$(".nameTxt").html("Welcome " + respObj.user.first_name);
 		$(".nameTxt").show();
-		window.swHistory.currentUser = user.user
+		window.swHistory.currentUser = respObj.user;
 		fetchData();
 	});
 	
@@ -53,6 +55,9 @@ function fetchData() {
 		url: 'http://localhost:8000/api/mydata',
 		method: "GET",
 		success: function(data) {
+			$(".container").show();
+			$(".options").show();
+			$(".loader").hide();
 			loadData(data);
 		},
 		error: function(err, data, response) {
