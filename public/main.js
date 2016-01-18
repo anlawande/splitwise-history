@@ -99,6 +99,7 @@ function createBalanceHistory(data, options) {
 		series = getSeriesForUser(data.expenses, window.swHistory.currentUser.id, options);
 		series = convertToSeries(series, options);
 		series.name = window.swHistory.currentUser.first_name + " " +  window.swHistory.currentUser.last_name;
+		series.step = true;
 		seriesArr.push(series);
 	}
 	else {
@@ -119,6 +120,7 @@ function createBalanceHistory(data, options) {
 			series = convertToSeries(series, options);
 			
 			series.name = friends[i].name;
+			series.step = true;
 			series.visible = friends[i].visible;
 			seriesArr.push(series);
 		}
@@ -181,10 +183,22 @@ function getBalanceForUser(users, user) {
 }
 
 function createChart(seriesArr) {
-	var chart = $('#container').highcharts({
-		chart: {
-			type: 'line'
+	var chart = $('#container').highcharts("StockChart", {
+//		chart: {
+//			type: 'line'
+//		},
+		legend: {
+			enabled: true,
+			align: 'right',
+			backgroundColor: '#FCFFC5',
+			borderColor: 'black',
+			borderWidth: 2,
+			layout: 'vertical',
+			verticalAlign: 'top',
+			y: 100,
+			shadow: true
 		},
+        
 		title: {
 			text: 'Expenses'
 		},
@@ -208,23 +222,24 @@ function createChart(seriesArr) {
 		},
 		tooltip: {
 			formatter: function () {
-				return '<b>' + this.series.options.swExpenses[this.point.index]["description"] +
-					'</b><br/><span>$' + this.y.toFixed(2) + '</span>';
+				var d = new Date(this.x);
+				return '<b>' + this.points[0].series.options.swExpenses[this.points[0].point.index]["description"] +
+					'</b><br/><span>$' + this.y.toFixed(2) + '</span><br/><span>' + d.toLocaleDateString() + '</span>';
 			}
 		},
 
 		series: seriesArr,
 		
 		plotOptions: {
-            series: {
-                events: {
-                    legendItemClick: function () {
-                        window.swHistory.friends[this.index].visible = !this.visible;
+			series: {
+				events: {
+					legendItemClick: function () {
+						window.swHistory.friends[this.index].visible = !this.visible;
 						return true;
-                    }
-                }
-            }
-        },
+					}
+				}
+			}
+		},
 	});
 	/*var chart = $('#container').highcharts();
 	if(window.swHistory.options.perUser) {
