@@ -34,6 +34,12 @@ app.get("/oauth", function(req, res) {
 	});
 });
 
+app.get("/logout", function(req, res) {
+	delete req.session.oauth;
+	res.clearCookie("connect.sid");
+	res.redirect("/");
+});
+
 app.get("/dummydata", function(req, res) {
 	var dataObj = {};
 	dataObj.friends = JSON.parse(fs.readFileSync("./data/friends.json"), {encoding: 'utf8'})["friends"];

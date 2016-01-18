@@ -3,6 +3,7 @@ $(function () {
 	window.swHistory.options = {};
 	$(".container").hide();
 	$(".options").hide();
+	$(".loader").hide();
 	
 	$.ajax({
 		url: "/whoami",
@@ -22,6 +23,8 @@ $(function () {
 		var respObj = JSON.parse(body);
 		$(".nameTxt").html("Welcome " + respObj.user.first_name);
 		$(".nameTxt").show();
+		$(".loader").show();
+		$(".logoutLink").show();
 		window.swHistory.currentUser = respObj.user;
 		fetchData();
 	});

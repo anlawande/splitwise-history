@@ -7,9 +7,9 @@
 	"license": "MIT",
 	"private": true,
 	"dependencies": {
-		"highcharts-release": "~4.1.8",
 		"jquery": "~2.1.4",
 		"jslinq": "*",
-		"bootstrap": "~3.3.5"
+		"bootstrap": "~3.3.5",
+		"highstock": "highstock-release#~4.2.1"
 	}
 }
